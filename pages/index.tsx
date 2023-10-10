@@ -14,38 +14,38 @@ import { BiLogoFacebook, BiLogoTwitter } from "react-icons/bi";
 import Link from "next/link";
 const Home: NextPage = () => {
   const [walletState, setWalletState] = useState(false);
-  const { data: InitializeData } = useContractReads({
-    contracts: [
-      {
-        address: "0xB5E7902348BD9ebaD44504D0287c7eDcBB923661",
-        abi: Presaleabi,
-        functionName: "startTimestamp",
-        chainId: 5,
-      },
-      {
-        address: "0xB5E7902348BD9ebaD44504D0287c7eDcBB923661",
-        abi: Presaleabi,
-        functionName: "endTimestamp",
-        chainId: 5,
-      },
-      {
-        address: "0xB5E7902348BD9ebaD44504D0287c7eDcBB923661",
-        abi: Presaleabi,
-        functionName: "totalUSDTamounttoSale",
-        chainId: 5,
-      },
-      {
-        address: "0xB5E7902348BD9ebaD44504D0287c7eDcBB923661",
-        abi: Presaleabi,
-        functionName: "sellAmount",
-        chainId: 5,
-      },
-    ],
-  });
+  // const { data: InitializeData } = useContractReads({
+  //   contracts: [
+  //     {
+  //       address: "0xB5E7902348BD9ebaD44504D0287c7eDcBB923661",
+  //       abi: Presaleabi,
+  //       functionName: "startTimestamp",
+  //       chainId: 5,
+  //     },
+  //     {
+  //       address: "0xB5E7902348BD9ebaD44504D0287c7eDcBB923661",
+  //       abi: Presaleabi,
+  //       functionName: "endTimestamp",
+  //       chainId: 5,
+  //     },
+  //     {
+  //       address: "0xB5E7902348BD9ebaD44504D0287c7eDcBB923661",
+  //       abi: Presaleabi,
+  //       functionName: "totalUSDTamounttoSale",
+  //       chainId: 5,
+  //     },
+  //     {
+  //       address: "0xB5E7902348BD9ebaD44504D0287c7eDcBB923661",
+  //       abi: Presaleabi,
+  //       functionName: "sellAmount",
+  //       chainId: 5,
+  //     },
+  //   ],
+  // });
 
-  useEffect(() => {
-    console.log("InitializeData:", InitializeData);
-  });
+  // useEffect(() => {
+  //   console.log("InitializeData:", InitializeData);
+  // });
 
   return (
     <div>
