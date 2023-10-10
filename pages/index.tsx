@@ -7,11 +7,13 @@ import Jurgentzu from "./assets/img/Jurgentzu.svg";
 import Layer from "./assets/img/curve-layer.png";
 import { useContractReads } from "wagmi";
 import Presaleabi from "../utils/abi/presaleABI";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { AiFillInstagram } from "react-icons/ai";
 import { GiEvilBook, GiGamepad } from "react-icons/gi";
 import { BiLogoFacebook, BiLogoTwitter } from "react-icons/bi";
+import Link from "next/link";
 const Home: NextPage = () => {
+  const [walletState, setWalletState] = useState(false);
   const { data: InitializeData } = useContractReads({
     contracts: [
       {
@@ -47,14 +49,14 @@ const Home: NextPage = () => {
 
   return (
     <div>
-      <div className="relative flex flex-col px-[280px] pt-4 pb-28 justify-between h-screen">
+      <div className="relative flex flex-col px-[280px] pt-4 justify-between h-screen">
         <div className="flex justify-between items-center flex-row w-full gap-24">
-          <a href="/">
+          <Link href="/">
             <div className="flex items-center justify-center gap-2">
               <Image src={Logo} alt="delphium logo" width={52} height={39} />
               <div className="text-[24px] font-bold">Delphium</div>
             </div>
-          </a>
+          </Link>
           <div>
             <ConnectButton />
             {/* <button className="px-[25px] py-[7px] bg-[#c5b939] text-[#fff] rounded-lg">
@@ -74,7 +76,7 @@ const Home: NextPage = () => {
                 <a
                   href="https://kingdelphi.github.io/"
                   target="_blank"
-                  className="px-[25px] py-[7px] bg-[#c5b939] shadow-2xl shadow-[#c5b939] text-white text-xl font-bold rounded-md"
+                  className="px-[25px] py-[7px] bg-[#4ea4ff] shadow-2xl shadow-[#4ea4ff] text-white text-xl font-bold rounded-md"
                 >
                   Playing Game
                 </a>
@@ -83,7 +85,7 @@ const Home: NextPage = () => {
           </div>
 
           <div className="flex justify-end w-1/2">
-            <div className="relative flex flex-col justify-center items-center gap-[30px] w-[500px] h-[380px] shadow-2xl shadow-[#c5b93988] bg-[#33343B] px-[50px] py-[25px] rounded-xl">
+            <div className="relative flex flex-col justify-center items-center gap-[30px] w-[500px] h-[380px] shadow-2xl shadow-[#0e141a] bg-[#33343B] px-[50px] py-[25px] rounded-xl">
               <div className="absolute top-[-100px] left-[-50px]">
                 <Image src={Delphium} alt="Delphium" width={150} height={150} />
               </div>
@@ -135,59 +137,59 @@ const Home: NextPage = () => {
                 </div>
               </div>
               <div>
-                <button className="px-[25px] py-[7px] bg-[#c5b939] shadow-2xl shadow-[#c5b039] w-[350px] text-white rounded-lg">
+                <button className="px-[25px] py-[7px] bg-[#4ea4ff] shadow-md shadow-[#0e141a] w-[350px] text-white rounded-lg">
                   PURCHASE TOKENS
                 </button>
               </div>
             </div>
           </div>
         </div>
-        <div className="flex flex-row items-end justify-center gap-8 z-10">
-          <a
+        <div className="flex flex-row items-end justify-center gap-8 z-10 pb-20">
+          <Link
             href="https://www.facebook.com/delphic.chess/"
             target="_blank"
             title="facebook"
           >
-            <div className="p-3 bg-[#ffffff24] rounded-xl transition ease-in-out delay-50 hover:-translate-y-1 hover:scale-110 hover:bg-[#4ea4ff] duration-300">
+            <div className="p-3 bg-[#ffffff24] rounded-2xl transition ease-in-out delay-50 hover:-translate-y-1 hover:scale-110 hover:bg-[#4ea4ff] duration-300 shadow-2xl shadow-[#0e141a]">
               <BiLogoFacebook href="" size={30} />
             </div>
-          </a>
-          <a
+          </Link>
+          <Link
             href="https://twitter.com/DelphicChess"
             target="_blank"
             title="twitter"
           >
-            <div className="p-3 bg-[#ffffff24] rounded-xl transition ease-in-out delay-50 hover:-translate-y-1 hover:scale-110 hover:bg-[#486cff] duration-300">
+            <div className="p-3 bg-[#ffffff24] rounded-2xl transition ease-in-out delay-50 hover:-translate-y-1 hover:scale-110 hover:bg-[#486cff] duration-300 shadow-2xl shadow-[#0e141a]">
               <BiLogoTwitter href="" size={30} />
             </div>
-          </a>
-          <a
+          </Link>
+          <Link
             href="https://www.instagram.com/"
             target="_blank"
             title="instagram"
           >
-            <div className="p-3 bg-[#ffffff24] rounded-xl transition ease-in-out delay-50 hover:-translate-y-1 hover:scale-110 hover:bg-[#ff6c3a] duration-300">
+            <div className="p-3 bg-[#ffffff24] rounded-2xl transition ease-in-out delay-50 hover:-translate-y-1 hover:scale-110 hover:bg-[#ff6c3a] duration-300 shadow-2xl shadow-[#0e141a]">
               <AiFillInstagram href="" size={30} />
             </div>
-          </a>
-          <a
+          </Link>
+          <Link
             href="https://kingdelphi.github.io/"
             target="_blank"
             title="playing game"
           >
-            <div className="p-3 bg-[#ffffff24] rounded-xl transition ease-in-out delay-50 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300">
+            <div className="p-3 bg-[#ffffff24] rounded-2xl transition ease-in-out delay-50 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300 shadow-2xl shadow-[#0e141a]">
               <GiGamepad size={30} />
             </div>
-          </a>
-          <a
+          </Link>
+          <Link
             href="https://delphic-chess.fandom.com/wiki/Delphic_Chess_Wiki"
             target="_blank"
             title="story"
           >
-            <div className="p-3 bg-[#ffffff24] rounded-xl transition ease-in-out delay-50 hover:-translate-y-1 hover:scale-110 hover:bg-[#fb9551] duration-300">
+            <div className="p-3 bg-[#ffffff24] rounded-2xl transition ease-in-out delay-50 hover:-translate-y-1 hover:scale-110 hover:bg-[#fb9551] duration-300 shadow-2xl shadow-[#0e141a]">
               <GiEvilBook href="" size={30} />
             </div>
-          </a>
+          </Link>
         </div>
       </div>
       <div className="fixed w-full bottom-2">
