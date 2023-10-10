@@ -49,10 +49,12 @@ const Home: NextPage = () => {
     <div>
       <div className="relative flex flex-col px-[280px] pt-4 pb-28 justify-between h-screen">
         <div className="flex justify-between items-center flex-row w-full gap-24">
-          <div className="flex items-center justify-center gap-2">
-            <Image src={Logo} alt="delphium logo" width={52} height={39} />
-            <div className="text-[24px] font-bold">Delphium</div>
-          </div>
+          <a href="/">
+            <div className="flex items-center justify-center gap-2">
+              <Image src={Logo} alt="delphium logo" width={52} height={39} />
+              <div className="text-[24px] font-bold">Delphium</div>
+            </div>
+          </a>
           <div>
             <ConnectButton />
             {/* <button className="px-[25px] py-[7px] bg-[#c5b939] text-[#fff] rounded-lg">
@@ -70,11 +72,11 @@ const Home: NextPage = () => {
               </div>
               <div>
                 <a
-                  href="https://delphic-chess.fandom.com/wiki/The_Delphic_Lore"
+                  href="https://kingdelphi.github.io/"
                   target="_blank"
-                  className="px-[25px] py-[7px] bg-[#c5b939] shadow-2xl shadow-[#c5b939] text-white font-bold rounded-md"
+                  className="px-[25px] py-[7px] bg-[#c5b939] shadow-2xl shadow-[#c5b939] text-white text-xl font-bold rounded-md"
                 >
-                  WATCH Story
+                  Playing Game
                 </a>
               </div>
             </div>
