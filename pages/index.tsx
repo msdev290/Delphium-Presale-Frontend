@@ -81,24 +81,17 @@ const Home: NextPage = () => {
           </div>
 
           <div className="flex justify-end w-1/2">
-            <div className="flex flex-col justify-center items-center gap-[30px] w-[500px] h-[380px] shadow-2xl shadow-[#c5b93988] bg-[#33343B] px-[50px] py-[25px] rounded-xl">
-              <div className="flex absolute flex-row gap-80 top-[200px]">
-                <div>
-                  <Image
-                    src={Delphium}
-                    alt="Delphium"
-                    width={150}
-                    height={150}
-                  />
-                </div>
-                <div>
-                  <Image
-                    src={Jurgentzu}
-                    alt="Jurgentzu"
-                    width={150}
-                    height={150}
-                  />
-                </div>
+            <div className="relative flex flex-col justify-center items-center gap-[30px] w-[500px] h-[380px] shadow-2xl shadow-[#c5b93988] bg-[#33343B] px-[50px] py-[25px] rounded-xl">
+              <div className="absolute top-[-100px] left-[-50px]">
+                <Image src={Delphium} alt="Delphium" width={150} height={150} />
+              </div>
+              <div className="absolute top-[-100px] right-[-50px]">
+                <Image
+                  src={Jurgentzu}
+                  alt="Jurgentzu"
+                  width={150}
+                  height={150}
+                />
               </div>
               <div className="font-bold text-[18px]">TOKEN SALE ENDS IN</div>
               <div className="flex flex-row gap-5">
