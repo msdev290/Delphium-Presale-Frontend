@@ -5,25 +5,62 @@ import Logo from "./assets/img/logo.png";
 import Delphium from "./assets/img/Delphium.svg";
 import Jurgentzu from "./assets/img/Jurgentzu.svg";
 import Layer from "./assets/img/curve-layer.png";
-import { largeScreenMinWidth } from "@rainbow-me/rainbowkit/dist/css/sprinkles.css";
-
+import { useContractReads } from "wagmi";
+import Presaleabi from "../utils/abi/presaleABI";
+import { useEffect } from "react";
+import { AiFillInstagram } from "react-icons/ai";
+import { GiEvilBook, GiGamepad } from "react-icons/gi";
+import { BiLogoFacebook, BiLogoTwitter } from "react-icons/bi";
 const Home: NextPage = () => {
+  const { data: InitializeData } = useContractReads({
+    contracts: [
+      {
+        address: "0xB5E7902348BD9ebaD44504D0287c7eDcBB923661",
+        abi: Presaleabi,
+        functionName: "startTimestamp",
+        chainId: 5,
+      },
+      {
+        address: "0xB5E7902348BD9ebaD44504D0287c7eDcBB923661",
+        abi: Presaleabi,
+        functionName: "endTimestamp",
+        chainId: 5,
+      },
+      {
+        address: "0xB5E7902348BD9ebaD44504D0287c7eDcBB923661",
+        abi: Presaleabi,
+        functionName: "totalUSDTamounttoSale",
+        chainId: 5,
+      },
+      {
+        address: "0xB5E7902348BD9ebaD44504D0287c7eDcBB923661",
+        abi: Presaleabi,
+        functionName: "sellAmount",
+        chainId: 5,
+      },
+    ],
+  });
+
+  useEffect(() => {
+    console.log("InitializeData:", InitializeData);
+  });
+
   return (
     <div>
-      <div className="fixed flex justify-between items-center flex-row w-full px-[280px] gap-24">
-        <div className="flex items-center justify-center gap-2">
-          <Image src={Logo} alt="delphium logo" width={52} height={39} />
-          <div className="text-[24px] font-bold">Delphium</div>
-        </div>
-        <div>
-          <ConnectButton />
-          {/* <button className="px-[25px] py-[7px] bg-[#c5b939] text-[#fff] rounded-lg">
+      <div className="relative flex flex-col px-[280px] pt-4 pb-28 justify-between h-screen">
+        <div className="flex justify-between items-center flex-row w-full gap-24">
+          <div className="flex items-center justify-center gap-2">
+            <Image src={Logo} alt="delphium logo" width={52} height={39} />
+            <div className="text-[24px] font-bold">Delphium</div>
+          </div>
+          <div>
+            <ConnectButton />
+            {/* <button className="px-[25px] py-[7px] bg-[#c5b939] text-[#fff] rounded-lg">
             Connect Wallet
           </button> */}
+          </div>
         </div>
-      </div>
-      <div className="">
-        <div className="flex flex-row justify-center items-center h-screen px-[280px]">
+        <div className="flex flex-row justify-center items-center">
           <div className="flex w-1/2">
             <div className="flex flex-col pr-[100px] gap-[50px]">
               <div className="text-[56px] font-bold">Delphium Presale</div>
@@ -110,9 +147,56 @@ const Home: NextPage = () => {
             </div>
           </div>
         </div>
-        <div className="fixed w-full bottom-2">
-          <Image src={Layer} className="w-full" alt="layer" height={260} />
+        <div className="flex flex-row items-end justify-center gap-8 z-10">
+          <a
+            href="https://www.facebook.com/delphic.chess/"
+            target="_blank"
+            title="facebook"
+          >
+            <div className="p-3 bg-[#ffffff24] rounded-xl transition ease-in-out delay-50 hover:-translate-y-1 hover:scale-110 hover:bg-[#4ea4ff] duration-300">
+              <BiLogoFacebook href="" size={30} />
+            </div>
+          </a>
+          <a
+            href="https://twitter.com/DelphicChess"
+            target="_blank"
+            title="twitter"
+          >
+            <div className="p-3 bg-[#ffffff24] rounded-xl transition ease-in-out delay-50 hover:-translate-y-1 hover:scale-110 hover:bg-[#486cff] duration-300">
+              <BiLogoTwitter href="" size={30} />
+            </div>
+          </a>
+          <a
+            href="https://www.instagram.com/"
+            target="_blank"
+            title="instagram"
+          >
+            <div className="p-3 bg-[#ffffff24] rounded-xl transition ease-in-out delay-50 hover:-translate-y-1 hover:scale-110 hover:bg-[#ff6c3a] duration-300">
+              <AiFillInstagram href="" size={30} />
+            </div>
+          </a>
+          <a
+            href="https://kingdelphi.github.io/"
+            target="_blank"
+            title="playing game"
+          >
+            <div className="p-3 bg-[#ffffff24] rounded-xl transition ease-in-out delay-50 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300">
+              <GiGamepad size={30} />
+            </div>
+          </a>
+          <a
+            href="https://delphic-chess.fandom.com/wiki/Delphic_Chess_Wiki"
+            target="_blank"
+            title="story"
+          >
+            <div className="p-3 bg-[#ffffff24] rounded-xl transition ease-in-out delay-50 hover:-translate-y-1 hover:scale-110 hover:bg-[#fb9551] duration-300">
+              <GiEvilBook href="" size={30} />
+            </div>
+          </a>
         </div>
+      </div>
+      <div className="fixed w-full bottom-2">
+        <Image src={Layer} className="w-full" alt="layer" height={260} />
       </div>
     </div>
   );
