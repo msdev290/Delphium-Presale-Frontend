@@ -5,47 +5,122 @@ import Logo from "./assets/img/logo.png";
 import Delphium from "./assets/img/Delphium.svg";
 import Jurgentzu from "./assets/img/Jurgentzu.svg";
 import Layer from "./assets/img/curve-layer.png";
-import { useContractReads } from "wagmi";
+import { useContractReads, useContractWrite } from "wagmi";
 import Presaleabi from "../utils/abi/presaleABI";
 import { useEffect, useState } from "react";
 import { AiFillInstagram } from "react-icons/ai";
 import { GiEvilBook, GiGamepad } from "react-icons/gi";
 import { BiLogoFacebook, BiLogoTwitter } from "react-icons/bi";
 import Link from "next/link";
+import { parseEther } from "viem";
+import { getAccount } from "@wagmi/core";
+
 const Home: NextPage = () => {
   const [walletState, setWalletState] = useState(false);
-  // const { data: InitializeData } = useContractReads({
-  //   contracts: [
-  //     {
-  //       address: "0xB5E7902348BD9ebaD44504D0287c7eDcBB923661",
-  //       abi: Presaleabi,
-  //       functionName: "startTimestamp",
-  //       chainId: 5,
-  //     },
-  //     {
-  //       address: "0xB5E7902348BD9ebaD44504D0287c7eDcBB923661",
-  //       abi: Presaleabi,
-  //       functionName: "endTimestamp",
-  //       chainId: 5,
-  //     },
-  //     {
-  //       address: "0xB5E7902348BD9ebaD44504D0287c7eDcBB923661",
-  //       abi: Presaleabi,
-  //       functionName: "totalUSDTamounttoSale",
-  //       chainId: 5,
-  //     },
-  //     {
-  //       address: "0xB5E7902348BD9ebaD44504D0287c7eDcBB923661",
-  //       abi: Presaleabi,
-  //       functionName: "sellAmount",
-  //       chainId: 5,
-  //     },
-  //   ],
-  // });
+  const [isConnect, setIsConnect] = useState(false);
+  const [payableAmount, setPayableAmount] = useState("0");
+  const [userBalance, setUserBalance] = useState(0);
+  const currentDate = new Date();
+  const timeStamp = Math.floor(currentDate.getTime() / 1000);
+  const [endTime, setEndTime] = useState(1705330800);
+  const [days, setDays] = useState(0);
+  const [hours, setHours] = useState(0);
+  const [minutes, setMinutes] = useState(0);
+  const [seconds, setSeconds] = useState(0);
 
-  // useEffect(() => {
-  //   console.log("InitializeData:", InitializeData);
-  // });
+  const account = getAccount();
+
+  const { data: InitializeData } = useContractReads({
+    contracts: [
+      {
+        address: "0x5B54E62805FC3E502220a8D0F6dC40592AB4C7cD",
+        abi: Presaleabi,
+        functionName: "startTimestamp",
+        chainId: 5,
+      },
+      {
+        address: "0x5B54E62805FC3E502220a8D0F6dC40592AB4C7cD",
+        abi: Presaleabi,
+        functionName: "endTimestamp",
+        chainId: 5,
+      },
+      {
+        address: "0x5B54E62805FC3E502220a8D0F6dC40592AB4C7cD",
+        abi: Presaleabi,
+        functionName: "totalUSDTamounttoSale",
+        chainId: 5,
+      },
+      {
+        address: "0x5B54E62805FC3E502220a8D0F6dC40592AB4C7cD",
+        abi: Presaleabi,
+        functionName: "sellAmount",
+        chainId: 5,
+      },
+    ],
+  });
+
+  const { isLoading: BuyTokenLoading, write: BuyTokenWrite } = useContractWrite(
+    {
+      address: "0x5B54E62805FC3E502220a8D0F6dC40592AB4C7cD",
+      abi: Presaleabi,
+      functionName: "purchasea",
+      args: [parseEther(payableAmount)],
+      account: account.address,
+      value: parseEther(payableAmount),
+      chainId: 5,
+    }
+  );
+
+  useEffect(() => {
+    console.log("InitializeData:", Number(InitializeData[0].result));
+  });
+
+  const handleBuyToken = async () => {
+    // BuyTokenWrite();
+    console.log("BUY", Math.floor(new Date().getTime() / 1000));
+  };
+
+  const calcTime = () => {
+    var ts_diff = endTime - Math.floor(new Date().getTime() / 1000);
+    if (Math.floor(ts_diff / 60 / 60 / 24) >= 0) {
+      setDays(Math.floor(ts_diff / 60 / 60 / 24));
+    }
+    if (
+      Math.floor((ts_diff - days * 60 * 60 * 24) / 60 / 60) >= 0 &&
+      Math.floor((ts_diff - days * 60 * 60 * 24) / 60 / 60) < 24
+    ) {
+      setHours(Math.floor((ts_diff - days * 60 * 60 * 24) / 60 / 60));
+    }
+    if (
+      Math.floor((ts_diff - days * 60 * 60 * 24 - hours * 60 * 60) / 60) >= 0 &&
+      Math.floor((ts_diff - days * 60 * 60 * 24 - hours * 60 * 60) / 60) < 60
+    ) {
+      setMinutes(
+        Math.floor((ts_diff - days * 60 * 60 * 24 - hours * 60 * 60) / 60)
+      );
+    }
+    if (
+      Math.floor(
+        ts_diff - days * 60 * 60 * 24 - hours * 60 * 60 - minutes * 60
+      ) >= 0 &&
+      Math.floor(
+        ts_diff - days * 60 * 60 * 24 - hours * 60 * 60 - minutes * 60
+      ) < 60
+    ) {
+      setSeconds(
+        Math.floor(
+          ts_diff - days * 60 * 60 * 24 - hours * 60 * 60 - minutes * 60
+        )
+      );
+    }
+  };
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      calcTime();
+    }, 1000);
+    return () => clearTimeout(timer);
+  });
 
   return (
     <div>
@@ -102,25 +177,25 @@ const Home: NextPage = () => {
                 <div className="flex flex-col justify-center items-center gap-2">
                   <div>Days</div>
                   <div className="flex justify-center items-center text-[24px] px-[20px] py-[20px] border-solid border-white border-[1px] rounded-xl">
-                    00
+                    {days.toString().length < 2 ? "0" + days : days}
                   </div>
                 </div>
                 <div className="flex flex-col justify-center items-center gap-2">
                   <div>Hours</div>
                   <div className="flex justify-center items-center text-[24px] px-[20px] py-[20px] border-solid border-white border-[1px] rounded-xl">
-                    00
+                    {hours.toString().length < 2 ? "0" + hours : hours}
                   </div>
                 </div>
                 <div className="flex flex-col justify-center items-center gap-2">
                   <div>Minutes</div>
                   <div className="flex justify-center items-center text-[24px] px-[20px] py-[20px] border-solid border-white border-[1px] rounded-xl">
-                    00
+                    {minutes.toString().length < 2 ? "0" + minutes : minutes}
                   </div>
                 </div>
                 <div className="flex flex-col justify-center items-center gap-2">
                   <div>Seconds</div>
                   <div className="flex justify-center items-center text-[24px] px-[20px] py-[20px] border-solid border-white border-[1px] rounded-xl">
-                    00
+                    {seconds.toString().length < 2 ? "0" + seconds : seconds}
                   </div>
                 </div>
               </div>
@@ -137,7 +212,10 @@ const Home: NextPage = () => {
                 </div>
               </div>
               <div>
-                <button className="px-[25px] py-[7px] bg-[#4ea4ff] shadow-md shadow-[#0e141a] w-[350px] text-white rounded-lg">
+                <button
+                  className="px-[25px] py-[7px] bg-[#4ea4ff] shadow-md shadow-[#0e141a] w-[350px] text-white rounded-lg"
+                  onClick={handleBuyToken}
+                >
                   PURCHASE TOKENS
                 </button>
               </div>

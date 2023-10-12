@@ -70,7 +70,6 @@ const Presaleabi = [
     inputs: [
       { internalType: "address", name: "_phium", type: "address" },
       { internalType: "address", name: "_usdt", type: "address" },
-      { internalType: "uint256", name: "_limit", type: "uint256" },
       {
         internalType: "uint256",
         name: "_totalUSDTamounttoSale",
@@ -83,13 +82,6 @@ const Presaleabi = [
     name: "initialize",
     outputs: [{ internalType: "bool", name: "", type: "bool" }],
     stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "limit",
-    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
-    stateMutability: "view",
     type: "function",
   },
   {
@@ -128,13 +120,6 @@ const Presaleabi = [
     name: "rate",
     outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
     stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "redeemPHIUM",
-    outputs: [],
-    stateMutability: "nonpayable",
     type: "function",
   },
   {
