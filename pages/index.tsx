@@ -30,50 +30,50 @@ const Home: NextPage = () => {
 
   const account = getAccount();
 
-  const { data: InitializeData } = useContractReads({
-    contracts: [
-      {
-        address: "0x5B54E62805FC3E502220a8D0F6dC40592AB4C7cD",
-        abi: Presaleabi,
-        functionName: "startTimestamp",
-        chainId: 5,
-      },
-      {
-        address: "0x5B54E62805FC3E502220a8D0F6dC40592AB4C7cD",
-        abi: Presaleabi,
-        functionName: "endTimestamp",
-        chainId: 5,
-      },
-      {
-        address: "0x5B54E62805FC3E502220a8D0F6dC40592AB4C7cD",
-        abi: Presaleabi,
-        functionName: "totalUSDTamounttoSale",
-        chainId: 5,
-      },
-      {
-        address: "0x5B54E62805FC3E502220a8D0F6dC40592AB4C7cD",
-        abi: Presaleabi,
-        functionName: "sellAmount",
-        chainId: 5,
-      },
-    ],
-  });
+  // const { data: InitializeData } = useContractReads({
+  //   contracts: [
+  //     {
+  //       address: "0x5B54E62805FC3E502220a8D0F6dC40592AB4C7cD",
+  //       abi: Presaleabi,
+  //       functionName: "startTimestamp",
+  //       chainId: 5,
+  //     },
+  //     {
+  //       address: "0x5B54E62805FC3E502220a8D0F6dC40592AB4C7cD",
+  //       abi: Presaleabi,
+  //       functionName: "endTimestamp",
+  //       chainId: 5,
+  //     },
+  //     {
+  //       address: "0x5B54E62805FC3E502220a8D0F6dC40592AB4C7cD",
+  //       abi: Presaleabi,
+  //       functionName: "totalUSDTamounttoSale",
+  //       chainId: 5,
+  //     },
+  //     {
+  //       address: "0x5B54E62805FC3E502220a8D0F6dC40592AB4C7cD",
+  //       abi: Presaleabi,
+  //       functionName: "sellAmount",
+  //       chainId: 5,
+  //     },
+  //   ],
+  // });
 
-  const { isLoading: BuyTokenLoading, write: BuyTokenWrite } = useContractWrite(
-    {
-      address: "0x5B54E62805FC3E502220a8D0F6dC40592AB4C7cD",
-      abi: Presaleabi,
-      functionName: "purchasea",
-      args: [parseEther(payableAmount)],
-      account: account.address,
-      value: parseEther(payableAmount),
-      chainId: 5,
-    }
-  );
+  // const { isLoading: BuyTokenLoading, write: BuyTokenWrite } = useContractWrite(
+  //   {
+  //     address: "0x5B54E62805FC3E502220a8D0F6dC40592AB4C7cD",
+  //     abi: Presaleabi,
+  //     functionName: "purchasea",
+  //     args: [parseEther(payableAmount)],
+  //     account: account.address,
+  //     value: parseEther(payableAmount),
+  //     chainId: 5,
+  //   }
+  // );
 
-  useEffect(() => {
-    console.log("InitializeData:", Number(InitializeData[0].result));
-  });
+  // useEffect(() => {
+  //   console.log("InitializeData:", Number(InitializeData[0].result));
+  // });
 
   const handleBuyToken = async () => {
     // BuyTokenWrite();
